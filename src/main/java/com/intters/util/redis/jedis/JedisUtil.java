@@ -11,14 +11,28 @@ import redis.clients.jedis.JedisPool;
  */
 public class JedisUtil {
 
-    @Autowired
-    private static JedisPool jedisPool;
+    private static JedisPool JEDIS_POOL;
 
     private static Jedis jedis = null;
 
+    private static JedisUtil JEDIS_UTIL = null;
+
+    public JedisUtil() {
+    }
+
+    public JedisUtil(JedisPool jedisPool) {
+        JEDIS_POOL = jedisPool;
+        jedis = JEDIS_POOL.getResource();
+    }
+
+    public static JedisUtil init(JedisPool jedisPool) {
+        JEDIS_UTIL = new JedisUtil(jedisPool);
+        return JEDIS_UTIL;
+    }
+
     private static Jedis getJedis() {
         if (jedis == null) {
-            jedis = jedisPool.getResource();
+            jedis = JEDIS_POOL.getResource();
         }
         return jedis;
     }

@@ -13,9 +13,39 @@ import org.apache.commons.lang3.StringUtils;
  * @date 2018/7/16.
  */
 @Slf4j
-public class ThrowException {
+public class Assert {
 
     public final static String EXCEPTION_INFORMATION = "【%s】 错误信息描述：{}";
+
+    /**
+     * 判断是否为空
+     * 查询是否为空
+     *
+     * @param object 校验对象
+     * @param msg 错误信息
+     */
+    public static void checkNull(Object object, String msg) {
+        if (!ObjectUtil.isNotEmpty(object)) {
+            throw new BaseException(msg);
+        }
+    }
+
+    /**
+     * 判断是否为空
+     * 查询是否为空
+     *
+     * @param object 校验对象
+     * @param description 错误信息描述
+     * @param msg 错误信息
+     */
+    public static void checkNull(Object object, String description, String msg) {
+        if (!ObjectUtil.isNotEmpty(object)) {
+            if (StringUtils.isNotEmpty(description)) {
+                log.error(String.format(EXCEPTION_INFORMATION, description), msg);
+            }
+            throw new BaseException(msg);
+        }
+    }
 
     /**
      * 判断是否为空
@@ -37,9 +67,25 @@ public class ThrowException {
      * @param description 错误信息描述
      */
     public static void checkNull(Object object, CodeEnum codeEnum, String description) {
+        checkNull(object, codeEnum, description, null);
+    }
+
+    /**
+     * 判断是否为空
+     * 查询是否为空
+     *
+     * @param object 校验对象
+     * @param codeEnum 错误信息
+     * @param description 错误信息描述
+     * @param msg 错误信息
+     */
+    public static void checkNull(Object object, CodeEnum codeEnum, String description, String msg) {
         if (!ObjectUtil.isNotEmpty(object)) {
             if (StringUtils.isNotEmpty(description)) {
                 log.error(String.format(EXCEPTION_INFORMATION, description), codeEnum.getMsg());
+            }
+            if (StringUtils.isNotEmpty(msg)) {
+                throw new BaseException(msg);
             }
             throw new BaseException(codeEnum);
         }

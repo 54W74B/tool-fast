@@ -11,6 +11,27 @@
 	<name>tool-fast</name>
 	<description>Rapid development tool class</description>
 
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Ruison</name>
+			<email>yuanjjrr@foxmail.com</email>
+			<url>https://github.com/54W74B</url>
+		</developer>
+	</developers>
+
+	<scm>
+		<url>https://github.com/54W74B/tool-fast</url>
+		<connection>https://github.com/54W74B/tool-fast.git</connection>
+		<developerConnection>https://github.com/54W74B</developerConnection>
+	</scm>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -29,9 +50,16 @@
 		<swagger.version>2.9.2</swagger.version>
 		<swagger.models.version>1.5.21</swagger.models.version>
 		<swagger.bootstrapui.version>1.9.2</swagger.bootstrapui.version>
+		<hutool.version>5.4.0</hutool.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>cn.hutool</groupId>
+			<artifactId>hutool-all</artifactId>
+			<version>${hutool.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
@@ -102,6 +130,13 @@
 			<version>${mybatis.version}</version>
 		</dependency>
 
+		<!-- FTP -->
+		<dependency>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>
+			<version>3.6</version>
+		</dependency>
+
 		<!--Swagger-->
 		<dependency>
 			<groupId>io.springfox</groupId>
@@ -152,13 +187,13 @@
 	<distributionManagement>
 		<repository>
 			<id>nexus</id>
-			<name>maven-releases</name>
-			<url>http://94.191.29.128:8081/repository/maven-releases/</url>
+			<name>ruison-release</name>
+			<url>http://123.207.243.158:8081/repository/ruison-release/</url>
 		</repository>
 		<snapshotRepository>
 			<id>nexus</id>
-			<name>maven-snapshots</name>
-			<url>http://94.191.29.128:8081/repository/maven-snapshots/</url>
+			<name>ruison-snapshot</name>
+			<url>http://123.207.243.158:8081/repository/ruison-snapshot/</url>
 		</snapshotRepository>
 	</distributionManagement>
 

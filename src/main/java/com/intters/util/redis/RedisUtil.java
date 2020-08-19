@@ -1,6 +1,5 @@
 package com.intters.util.redis;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.Map;
@@ -15,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class RedisUtil {
 
     private RedisTemplate<String, String> redisTemplate;
+    private static RedisUtil REDIS_UTIL = null;
 
     public RedisUtil() {
     }
@@ -22,6 +22,16 @@ public class RedisUtil {
     public RedisUtil(RedisTemplate<String, String> redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
+
+    public static RedisUtil init(RedisTemplate<String, String> redisTemplate) {
+        REDIS_UTIL = new RedisUtil(redisTemplate);
+        return REDIS_UTIL;
+    }
+
+    public static RedisUtil getInstance() {
+        return REDIS_UTIL;
+    }
+
     // ------------------------------------------------------Key（键），简单的key-value操作
 
     /**
@@ -42,6 +52,18 @@ public class RedisUtil {
      */
     public void expire(String key, long expire) {
         redisTemplate.expire(key, expire, TimeUnit.SECONDS);
+    }
+
+    /**
+     * 实现命令：expire 设置过期时间，单位秒
+     *
+     * @param key
+     * @param expire 超市时间
+     * @param timeUnit 时间单位
+     * @return
+     */
+    public void expire(String key, long expire, TimeUnit timeUnit) {
+        redisTemplate.expire(key, expire, timeUnit);
     }
 
     /**
@@ -87,11 +109,22 @@ public class RedisUtil {
      *
      * @param key
      * @param value
-     * @param expire
-     *            （以秒为单位）
+     * @param expire（以秒为单位）
      */
     public void set(String key, String value, long expire) {
-        redisTemplate.opsForValue().set(key, value, expire, TimeUnit.SECONDS);
+        this.set(key, value, expire, TimeUnit.SECONDS);
+    }
+
+    /**
+     * 实现命令：SET key value EX seconds，设置key-value和超时时间（秒）
+     *
+     * @param key
+     * @param value
+     * @param expire 超时时间
+     * @param timeUnit 时间单位
+     */
+    public void set(String key, String value, long expire, TimeUnit timeUnit) {
+        redisTemplate.opsForValue().set(key, value, expire, timeUnit);
     }
 
     /**

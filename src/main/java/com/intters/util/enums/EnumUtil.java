@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * 枚举工具类
+ *
  * @author Ruison
  * @date 2018/7/14.
  */
@@ -30,10 +31,11 @@ public class EnumUtil {
 
     /**
      * 根据code获取枚举
+     *
      * @param code int值
      * @param enumClass 枚举
-     * @param <T>
-     * @return
+     * @param <T> 泛型
+     * @return 枚举
      */
     public static <T extends CodeEnum> T getByCode(Integer code, Class<T> enumClass) {
         for (T each : enumClass.getEnumConstants()) {
@@ -45,13 +47,14 @@ public class EnumUtil {
     }
 
     /**
-     * 根据code获取枚举
+     * 根据msg获取枚举
+     *
      * @param msg String值
      * @param enumClass 枚举
-     * @param <T>
-     * @return
+     * @param <T> 泛型
+     * @return 枚举
      */
-    public static <T extends CodeEnum> T getByCode(String msg, Class<T> enumClass) {
+    public static <T extends CodeEnum> T getByMsg(String msg, Class<T> enumClass) {
         for (T each : enumClass.getEnumConstants()) {
             if (msg.equals(each.getMsg())) {
                 return each;

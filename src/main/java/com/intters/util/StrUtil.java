@@ -87,7 +87,6 @@ public class StrUtil<T> {
         if (val == null) {
             return new String[]{};
         }
-        String[] str = new String[val.indexOf(",")];
         return val.indexOf(",") == 0 ? new String[]{val} : val.split(split);
     }
 
@@ -122,21 +121,17 @@ public class StrUtil<T> {
      * @param val
      * @return Integer
      */
-    public static List<Integer> splitInt(String delimiter, String... val) {
+    public static List<String> splitInt(String delimiter, String... val) {
         if (val == null) {
             return null;
         }
         List<String> lists = new ArrayList<>();
-        List<Integer> integers = new ArrayList<>();
-        for (int i = 0; i < val.length; i++) {
-            String[] wait = val[i].split(delimiter);
-            for (int j = 0; j < wait.length; j++) {
-                integers.add(Integer.parseInt(wait[j]));
-            }
-            lists.addAll(Arrays.asList(val[i].split(delimiter)));
+        for (String v : val) {
+            String[] wait = v.split(delimiter);
+            lists.addAll(Arrays.asList(wait));
         }
 
-        return integers;
+        return lists;
     }
 
     /**
@@ -189,8 +184,9 @@ public class StrUtil<T> {
     }
 
     public static void main(String[] args) {
-        String[] a = new String[1];
-        a[0] = "1";
-        System.out.println(StrUtil.splitStr("1"));
+        String[] a = StrUtil.toStrArray(",", "1,2");
+        for (String s : a) {
+            System.out.println(s);
+        }
     }
 }
