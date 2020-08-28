@@ -14,18 +14,19 @@ public class JsonUtil {
 
     /**
      * 转化为对象
-     * @param json json数据
-     * @param classs 对象
-     * @param <T>
+     *
+     * @param json  json数据
+     * @param clazz 对象
+     * @param <T>   泛型对象
      * @return 反序列化的对象
      */
-    public static  <T> T toJsonBean(String json, Class<T> classs) {
-        return JSON.parseObject(json, classs);
+    public static <T> T toJsonBean(String json, Class<T> clazz) {
+        return JSON.parseObject(json, clazz);
     }
 
     /**
      * 转换成Json对象
-     * fastjson转化json效率高于GSON
+     * FastJson转化json效率高于GSON
      *
      * @param object 对象
      * @return 序列化的对象

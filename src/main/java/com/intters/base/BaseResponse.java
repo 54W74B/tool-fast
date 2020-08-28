@@ -1,7 +1,7 @@
 package com.intters.base;
 
-import com.intters.util.enums.CodeEnum;
-import com.intters.util.enums.ResponseEnum;
+import com.intters.enums.CodeEnum;
+import com.intters.enums.ResponseEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;

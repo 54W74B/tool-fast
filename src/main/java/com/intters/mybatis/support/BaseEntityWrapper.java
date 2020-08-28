@@ -16,6 +16,7 @@ public abstract class BaseEntityWrapper<E, V> {
 
     /**
      * 单个实体类包装
+     *
      * @param entity
      * @return
      */
@@ -23,6 +24,7 @@ public abstract class BaseEntityWrapper<E, V> {
 
     /**
      * 实体类集合包装
+     *
      * @param list
      * @return
      */
@@ -32,6 +34,7 @@ public abstract class BaseEntityWrapper<E, V> {
 
     /**
      * 分页实体类集合包装
+     *
      * @param pages
      * @return
      */

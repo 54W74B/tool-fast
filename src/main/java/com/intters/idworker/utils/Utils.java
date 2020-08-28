@@ -1,6 +1,6 @@
 package com.intters.idworker.utils;
 
-import com.intters.util.RandomUtil;
+import cn.hutool.core.util.RandomUtil;
 
 import java.io.*;
 import java.util.Calendar;

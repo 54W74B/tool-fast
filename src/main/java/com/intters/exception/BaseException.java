@@ -1,7 +1,7 @@
 package com.intters.exception;
 
 import cn.hutool.core.exceptions.ExceptionUtil;
-import com.intters.util.enums.CodeEnum;
+import com.intters.enums.CodeEnum;
 import lombok.Getter;
 
 /**

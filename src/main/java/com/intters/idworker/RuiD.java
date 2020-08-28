@@ -59,12 +59,12 @@ public class RuiD {
         String yyMMdd = new SimpleDateFormat("yyMMdd").format(new Date());
         return yyMMdd + Utils.padLeft(Utils.encode(id), 10, '0');
     }
-    
-    public static void main(String[] args) {
-		String aa = RuiD.nextShort();
-		String bb = RuiD.next();
 
-		System.out.println(aa);
-		System.out.println(bb);
-	}
+    public static void main(String[] args) {
+        String aa = RuiD.nextShort();
+        String bb = RuiD.next();
+
+        System.out.println(aa);
+        System.out.println(bb);
+    }
 }

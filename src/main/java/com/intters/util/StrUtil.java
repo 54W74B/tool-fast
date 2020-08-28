@@ -1,6 +1,9 @@
 package com.intters.util;
 
+import cn.hutool.core.util.NumberUtil;
+
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 字符串工具类
@@ -8,11 +11,11 @@ import java.util.*;
  * @author Ruison
  * @date 2018/7/14.
  */
-public class StrUtil<T> {
+public class StrUtil {
 
     /**
      * 拼接字符串
-     * 采用Stringbuffer，避免过程产生太多的String对象
+     * 采用StringBuilder，避免过程产生太多的String对象
      *
      * @param val 需要拼接的字符串
      * @return 字符串
@@ -21,9 +24,9 @@ public class StrUtil<T> {
         if (val == null) {
             return null;
         }
-        StringBuffer str = new StringBuffer();
-        for (int i = 0; i < val.length; i++) {
-            str.append(val[i]);
+        StringBuilder str = new StringBuilder();
+        for (String s : val) {
+            str.append(s);
         }
         return str.toString();
     }
@@ -33,13 +36,16 @@ public class StrUtil<T> {
      * StringJoiner解决低效率的字符串拼接
      *
      * @param delimiter 分隔符
-     * @param val 需要拼接的字符串
-     * @return
+     * @param val       需要拼接的字符串
+     * @return 拼接好的字符串
      */
-    public static String spliceSepar(String delimiter, String... val) {
+    public static String splice(String delimiter, String... val) {
+        if (val == null) {
+            return null;
+        }
         StringJoiner str = new StringJoiner(delimiter);
-        for (int i = 0; i < val.length; i++) {
-            str.add(val[i]);
+        for (String s : val) {
+            str.add(s);
         }
         return str.toString();
     }
@@ -49,16 +55,17 @@ public class StrUtil<T> {
      * 如果只是根据字符分割字符串，采用StringTokenizer效率会更高
      * 如果分割空格等字符串，采用split效率会更好
      *
-     * @param val
-     * @return
+     * @param delimiter 分隔符
+     * @param val       需要分割得字符串
+     * @return 分割好的字符串数组
      */
     public static List<String> segment(String delimiter, String... val) {
         if (val == null) {
             return null;
         }
         List<String> list = new ArrayList<>();
-        for (int i = 0; i < val.length; i++) {
-            StringTokenizer str = new StringTokenizer(val[i], delimiter);
+        for (String s : val) {
+            StringTokenizer str = new StringTokenizer(s, delimiter);
             while (str.hasMoreElements()) {
                 list.add(str.nextToken());
             }
@@ -98,46 +105,44 @@ public class StrUtil<T> {
      * 根据字符串分割字符串
      * 遇到 '/n' '/t'等，采用split效率会更好
      *
-     * @param delimiter
-     * @param val
-     * @return String
+     * @param delimiter 分隔符
+     * @param val 需要分割得字符串
+     * @return 分割好的字符串数组
      */
     public static List<String> splitStr(String delimiter, String... val) {
         if (val == null) {
             return null;
         }
         List<String> list = new ArrayList<>();
-        for (int i = 0; i < val.length; i++) {
-            list.addAll(Arrays.asList(val[i].split(delimiter)));
+        for (String s : val) {
+            list.addAll(Arrays.asList(s.split(delimiter)));
         }
         return list;
     }
 
     /**
-     * 根据字符串分割字符串
+     * 分割字符串并转换成数字
      * 遇到 '/n' '/t'等，采用split效率会更好
      *
-     * @param delimiter
-     * @param val
+     * @param delimiter 分隔符
+     * @param val 需要分割得字符串
      * @return Integer
      */
-    public static List<String> splitInt(String delimiter, String... val) {
+    public static List<Integer> splitInt(String delimiter, String... val) {
         if (val == null) {
             return null;
         }
         List<String> lists = new ArrayList<>();
-        for (String v : val) {
-            String[] wait = v.split(delimiter);
-            lists.addAll(Arrays.asList(wait));
+        for (String s : val) {
+            lists.addAll(Arrays.asList(s.split(delimiter)));
         }
-
-        return lists;
+        return lists.stream().filter(NumberUtil::isNumber).map(Integer::valueOf).collect(Collectors.toList());
     }
 
     /**
      * 为空赋予默认值
      *
-     * @param val 判断是否为空的值
+     * @param val        判断是否为空的值
      * @param defaultVal 默认值
      * @return 返回String类型不为空的字符串
      */
@@ -171,7 +176,7 @@ public class StrUtil<T> {
      * 首字母变小写
      *
      * @param str 字符串
-     * @return {String}
+     * @return 首字母小写的字符串
      */
     public static String lowerFirst(String str) {
         char firstChar = str.charAt(0);
@@ -181,12 +186,5 @@ public class StrUtil<T> {
             return new String(arr);
         }
         return str;
-    }
-
-    public static void main(String[] args) {
-        String[] a = StrUtil.toStrArray(",", "1,2");
-        for (String s : a) {
-            System.out.println(s);
-        }
     }
 }

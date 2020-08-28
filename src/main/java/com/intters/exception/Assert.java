@@ -1,7 +1,7 @@
 package com.intters.exception;
 
-import com.intters.util.enums.CodeEnum;
-import com.intters.util.ObjectUtil;
+import cn.hutool.core.util.ObjectUtil;
+import com.intters.enums.CodeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
@@ -22,7 +22,7 @@ public class Assert {
      * 查询是否为空
      *
      * @param object 校验对象
-     * @param msg 错误信息
+     * @param msg    错误信息
      */
     public static void checkNull(Object object, String msg) {
         if (!ObjectUtil.isNotEmpty(object)) {
@@ -34,9 +34,9 @@ public class Assert {
      * 判断是否为空
      * 查询是否为空
      *
-     * @param object 校验对象
+     * @param object      校验对象
      * @param description 错误信息描述
-     * @param msg 错误信息
+     * @param msg         错误信息
      */
     public static void checkNull(Object object, String description, String msg) {
         if (!ObjectUtil.isNotEmpty(object)) {
@@ -51,7 +51,7 @@ public class Assert {
      * 判断是否为空
      * 查询是否为空
      *
-     * @param object 校验对象
+     * @param object   校验对象
      * @param codeEnum 错误信息
      */
     public static void checkNull(Object object, CodeEnum codeEnum) {
@@ -62,8 +62,8 @@ public class Assert {
      * 判断是否为空
      * 查询是否为空
      *
-     * @param object 校验对象
-     * @param codeEnum 错误信息
+     * @param object      校验对象
+     * @param codeEnum    错误信息
      * @param description 错误信息描述
      */
     public static void checkNull(Object object, CodeEnum codeEnum, String description) {
@@ -74,10 +74,10 @@ public class Assert {
      * 判断是否为空
      * 查询是否为空
      *
-     * @param object 校验对象
-     * @param codeEnum 错误信息
+     * @param object      校验对象
+     * @param codeEnum    错误信息
      * @param description 错误信息描述
-     * @param msg 错误信息
+     * @param msg         错误信息
      */
     public static void checkNull(Object object, CodeEnum codeEnum, String description, String msg) {
         if (!ObjectUtil.isNotEmpty(object)) {
@@ -95,7 +95,7 @@ public class Assert {
      * 判断是否小于等于0
      * 判断更新，删除，插入等操作是否成功
      *
-     * @param result 更新，删除，插入等操作结果值，int类型
+     * @param result   更新，删除，插入等操作结果值，int类型
      * @param codeEnum 错误信息
      */
     public static void lessThanZero(int result, CodeEnum codeEnum) {
@@ -106,8 +106,8 @@ public class Assert {
      * 判断是否小于等于0
      * 判断更新，删除，插入等操作是否成功
      *
-     * @param result 更新，删除，插入等操作结果值，int类型
-     * @param codeEnum 错误信息
+     * @param result      更新，删除，插入等操作结果值，int类型
+     * @param codeEnum    错误信息
      * @param description 错误信息描述
      */
     public static void lessThanZero(Integer result, CodeEnum codeEnum, String description) {
@@ -123,7 +123,7 @@ public class Assert {
      * 判断波尔类型
      * 判断更新，删除，插入等操作是否成功
      *
-     * @param result 更新，删除，插入等操作结果值，boolean类型
+     * @param result   更新，删除，插入等操作结果值，boolean类型
      * @param codeEnum 错误信息
      */
     public static void checkBoolean(boolean result, CodeEnum codeEnum) {
@@ -134,8 +134,8 @@ public class Assert {
      * 判断波尔类型
      * 判断更新，删除，插入等操作是否成功
      *
-     * @param result 更新，删除，插入等操作结果值，boolean类型
-     * @param codeEnum 错误信息
+     * @param result      更新，删除，插入等操作结果值，boolean类型
+     * @param codeEnum    错误信息
      * @param description 错误信息描述
      */
     public static void checkBoolean(boolean result, CodeEnum codeEnum, String description) {
@@ -151,7 +151,7 @@ public class Assert {
      * 判断是否大于0
      * 查询是否存在某个值
      *
-     * @param result 查询操作等结果值，int类型
+     * @param result   查询操作等结果值，int类型
      * @param codeEnum 错误信息
      */
     public static void greaterThanZero(int result, CodeEnum codeEnum) {
@@ -162,8 +162,8 @@ public class Assert {
      * 判断是否大于0
      * 查询是否存在某个值
      *
-     * @param result 查询操作等结果值，int类型
-     * @param codeEnum 错误信息
+     * @param result      查询操作等结果值，int类型
+     * @param codeEnum    错误信息
      * @param description 错误信息描述
      */
     public static void greaterThanZero(Integer result, CodeEnum codeEnum, String description) {

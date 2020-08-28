@@ -1,10 +1,10 @@
 package com.intters.mybatis.support;
 
+import cn.hutool.core.util.NumberUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.intters.util.NumberUtil;
-import com.intters.util.ObjectUtil;
 import com.intters.util.StrUtil;
 import org.springframework.beans.BeanUtils;
 
@@ -28,7 +28,7 @@ public class Condition {
      * @return
      */
     public static <T> IPage<T> getPage(Query query) {
-        Page<T> page = new Page<>(NumberUtil.toInt(query.getCurrent(), 1), NumberUtil.toInt(query.getSize(), 10));
+        Page<T> page = new Page<>(query.getCurrent(), query.getSize());
         page.setAsc(StrUtil.toStrArray(query.getAscs()));
         page.setDesc(StrUtil.toStrArray(query.getDescs()));
         return page;
@@ -79,11 +79,11 @@ public class Condition {
     /**
      * 判断属性是不是属于该类得属性
      *
-     * @param clazz 类
+     * @param clazz     类
      * @param attribute 属性
      * @return true or false
      */
-    private static  boolean equal(Class clazz, String attribute) {
+    private static boolean equal(Class clazz, String attribute) {
         for (Field field : clazz.getDeclaredFields()) {
             field.setAccessible(true);
             if (field.getName().equals(attribute)) {

@@ -37,4 +37,12 @@ public class Query {
      */
     @ApiModelProperty(hidden = true)
     private String descs;
+
+    public Integer getCurrent() {
+        return current == null ? 1 : current;
+    }
+
+    public Integer getSize() {
+        return size == null ? 1 : size;
+    }
 }

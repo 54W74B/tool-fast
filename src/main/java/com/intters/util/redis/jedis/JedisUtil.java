@@ -1,11 +1,12 @@
 package com.intters.util.redis.jedis;
 
 import com.intters.util.SerializeUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 /**
+ * Jedis操作工具类
+ *
  * @author Ruison
  * @date 2018/8/6.
  */
@@ -45,11 +46,12 @@ public class JedisUtil {
 
     /**
      * 设置
-     * @param key 键名称
+     *
+     * @param key   键名称
      * @param value 键值
-     * @param time 过期时间
+     * @param time  过期时间
      */
-    public static void set(String key, String value, int time){
+    public static void set(String key, String value, int time) {
         try {
             Jedis jedis = getJedis();
             jedis.set(key, value);
@@ -64,9 +66,10 @@ public class JedisUtil {
     }
 
     /**
-     * 获取
+     * 获取值
+     *
      * @param key 键名称
-     * @return
+     * @return 值
      */
     public static String get(String key) {
         try {
@@ -82,7 +85,8 @@ public class JedisUtil {
 
     /**
      * 设置对象（经过序列化处理）
-     * @param key 键名称
+     *
+     * @param key   键名称
      * @param value 键值
      */
     public static void set(byte[] key, Object value) {
@@ -98,13 +102,14 @@ public class JedisUtil {
 
     /**
      * 获取对象（经过反序列化处理）
+     *
      * @param key 键名称
-     * @return
+     * @return 反序列化处理后的对象
      */
     public static Object get(byte[] key) {
         try {
             Jedis jedis = getJedis();
-            return SerializeUtil.unserialize(jedis.get(key));
+            return SerializeUtil.unSerialize(jedis.get(key));
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -115,15 +120,16 @@ public class JedisUtil {
 
     /**
      * 删除
-     * @param key
+     *
+     * @param key 键名称
      */
     public static void del(Object key) {
         try {
             Jedis jedis = getJedis();
             if (key instanceof String) {
-                jedis.del((String)key);
+                jedis.del((String) key);
             } else if (key instanceof byte[]) {
-                jedis.del((byte[])key);
+                jedis.del((byte[]) key);
             }
         } catch (Exception e) {
             e.printStackTrace();

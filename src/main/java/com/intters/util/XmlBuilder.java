@@ -28,7 +28,7 @@ public class XmlBuilder {
     private String getBuffer(String path) throws Exception {
         Resource resource = new ClassPathResource(path);
         BufferedReader bf = new BufferedReader(new InputStreamReader(resource.getInputStream(), "utf-8"));
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         String line = "";
         while ((line = bf.readLine()) != null) {
             buffer.append(line);
@@ -39,7 +39,8 @@ public class XmlBuilder {
 
     /**
      * XML 转POJO
-     * @param clazz 转化的POJO类
+     *
+     * @param clazz  转化的POJO类
      * @param xmlStr xml的String类型
      * @return 返货POJO对象
      * @throws Exception

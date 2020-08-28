@@ -14,10 +14,10 @@ public class HeaderUtil {
     /**
      * 获取请求头内容
      *
-     * @param request 当前请求的request
-     * @param name 请求头名称
+     * @param request     当前请求的request
+     * @param name        请求头名称
      * @param defaultName 默认
-     * @return 内容
+     * @return 请求头内容
      */
     public static String get(HttpServletRequest request, String name, String defaultName) {
         return get(request, name, null, defaultName);
@@ -26,11 +26,11 @@ public class HeaderUtil {
     /**
      * 获取请求头内容
      *
-     * @param request 当前请求的request
-     * @param name 请求头名称
-     * @param subLength 截取内容起始位置，适合截取携带Basic的token
+     * @param request     当前请求的request
+     * @param name        请求头名称
+     * @param subLength   截取内容起始位置，适合截取携带Basic的token
      * @param defaultName 默认
-     * @return 内容
+     * @return 请求头内容
      */
     public static String get(HttpServletRequest request, String name, Integer subLength, String defaultName) {
         String value = request.getHeader(name);
