@@ -64,6 +64,7 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>${servlet-api.version}</version>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>
@@ -77,6 +78,7 @@
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
 			<version>${jedis.version}</version>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>
@@ -98,6 +100,7 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>${lombok.version}</version>
+			<optional>true</optional>
 		</dependency>
 
 		<!-- apache 工具类 -->
@@ -105,29 +108,34 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>${commons-lang3.version}</version>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
 			<version>${commons-codec.version}</version>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 			<version>${fastjson.version}</version>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 			<version>${gson.version}</version>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<groupId>com.baomidou</groupId>
 			<artifactId>mybatis-plus-boot-starter</artifactId>
 			<version>${mybatis.version}</version>
+			<optional>true</optional>
 		</dependency>
 
 		<!-- FTP -->
@@ -142,6 +150,7 @@
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
 			<version>${swagger.version}</version>
+			<optional>true</optional>
 			<exclusions>
 				<exclusion>
 					<groupId>io.swagger</groupId>
@@ -153,11 +162,20 @@
 			<groupId>io.swagger</groupId>
 			<artifactId>swagger-models</artifactId>
 			<version>${swagger.models.version}</version>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>com.github.xiaoymin</groupId>
 			<artifactId>swagger-bootstrap-ui</artifactId>
 			<version>${swagger.bootstrapui.version}</version>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>7.3.0</version>
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
 

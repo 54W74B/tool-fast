@@ -5,6 +5,7 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.intters.util.StringPool;
 
+import java.lang.reflect.Field;
 import java.util.Map;
 
 /**
@@ -32,8 +33,10 @@ public class SqlKeyword {
      *
      * @param query 查询字段
      * @param qw    查询包装类
+     * @param clazz 类
+     * @param <T> 泛型
      */
-    public static void buildCondition(Map<String, Object> query, QueryWrapper<?> qw) {
+    public static <T> void buildCondition(Map<String, Object> query, QueryWrapper<?> qw, Class<T> clazz) {
         if (query.isEmpty()) {
             return;
         }
@@ -42,27 +45,60 @@ public class SqlKeyword {
                 return;
             }
             if (k.endsWith(EQUAL)) {
-                qw.eq(getColumn(k, EQUAL), v);
+                String column = getColumn(k, EQUAL);
+                if (clazz != null && classContainProperties(clazz, column)) {
+                    qw.eq(column, v);
+                }
             } else if (k.endsWith(NOT_EQUAL)) {
-                qw.ne(getColumn(k, NOT_EQUAL), v);
+                String column = getColumn(k, NOT_EQUAL);
+                if (clazz != null && classContainProperties(clazz, column)) {
+                    qw.ne(column, v);
+                }
             } else if (k.endsWith(NOT_LIKE)) {
-                qw.notLike(getColumn(k, NOT_LIKE), v);
+                String column = getColumn(k, NOT_LIKE);
+                if (clazz != null && classContainProperties(clazz, column)) {
+                    qw.notLike(column, v);
+                }
             } else if (k.endsWith(GT)) {
-                qw.gt(getColumn(k, GT), v);
+                String column = getColumn(k, GT);
+                if (clazz != null && classContainProperties(clazz, column)) {
+                    qw.gt(column, v);
+                }
             } else if (k.endsWith(LT)) {
-                qw.lt(getColumn(k, LT), v);
+                String column = getColumn(k, LT);
+                if (clazz != null && classContainProperties(clazz, column)) {
+                    qw.lt(column, v);
+                }
             } else if (k.endsWith(DATE_GT)) {
-                qw.gt(getColumn(k, DATE_GT), v);
+                String column = getColumn(k, DATE_GT);
+                if (clazz != null && classContainProperties(clazz, column)) {
+                    qw.gt(column, v);
+                }
             } else if (k.endsWith(DATE_EQUAL)) {
-                qw.eq(getColumn(k, DATE_EQUAL), v);
+                String column = getColumn(k, DATE_EQUAL);
+                if (clazz != null && classContainProperties(clazz, column)) {
+                    qw.eq(column, v);
+                }
             } else if (k.endsWith(DATE_LT)) {
-                qw.lt(getColumn(k, DATE_LT), v);
+                String column = getColumn(k, DATE_LT);
+                if (clazz != null && classContainProperties(clazz, column)) {
+                    qw.lt(column, v);
+                }
             } else if (k.endsWith(IS_NULL)) {
-                qw.isNull(getColumn(k, IS_NULL));
+                String column = getColumn(k, IS_NULL);
+                if (clazz != null && classContainProperties(clazz, column)) {
+                    qw.isNull(column);
+                }
             } else if (k.endsWith(NOT_NULL)) {
-                qw.isNotNull(getColumn(k, NOT_NULL));
+                String column = getColumn(k, NOT_NULL);
+                if (clazz != null && classContainProperties(clazz, column)) {
+                    qw.isNotNull(column);
+                }
             } else {
-                qw.like(getColumn(k, LIKE), v);
+                String column = getColumn(k, LIKE);
+                if (clazz != null && classContainProperties(clazz, column)) {
+                    qw.like(column, v);
+                }
             }
         });
     }
@@ -89,5 +125,23 @@ public class SqlKeyword {
             return null;
         }
         return param.replaceAll("(?i)" + SQL_REGEX, StringPool.EMPTY);
+    }
+
+    /**
+     * 判断属性是不是属于该类得属性
+     *
+     * @param clazz     类
+     * @param attribute 属性
+     * @param <T> 泛型
+     * @return true or false
+     */
+    private static <T> boolean classContainProperties(Class<T> clazz, String attribute) {
+        for (Field field : clazz.getDeclaredFields()) {
+            field.setAccessible(true);
+            if (field.getName().equals(attribute)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

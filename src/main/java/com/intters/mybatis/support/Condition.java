@@ -29,8 +29,8 @@ public class Condition {
      */
     public static <T> IPage<T> getPage(Query query) {
         Page<T> page = new Page<>(query.getCurrent(), query.getSize());
-        page.setAsc(StrUtil.toStrArray(query.getAscs()));
-        page.setDesc(StrUtil.toStrArray(query.getDescs()));
+        page.setAsc(StrUtil.toStrArray(SqlKeyword.filter(query.getAscs())));
+        page.setDesc(StrUtil.toStrArray(SqlKeyword.filter(query.getDescs())));
         return page;
     }
 
@@ -59,39 +59,12 @@ public class Condition {
             query.remove("current");
             query.remove("size");
             qw.setEntity(BeanUtils.instantiateClass(clazz));
-            query.forEach((k, v) -> {
-                if (ObjectUtil.isNotEmpty(v)) {
-                    if (equal(clazz, k)) {
-                        // 判断是否是查询还是模糊查询
-                        if (k.toUpperCase().contains(ID)) {
-                            qw.eq(StrUtil.humpToUnderline(k), v);
-                        } else {
-                            qw.like(StrUtil.humpToUnderline(k), v);
-                        }
-                    }
-                }
-            });
+            SqlKeyword.buildCondition(query, qw, clazz);
             query.clear();
         }
         return qw;
     }
 
-    /**
-     * 判断属性是不是属于该类得属性
-     *
-     * @param clazz     类
-     * @param attribute 属性
-     * @return true or false
-     */
-    private static boolean equal(Class clazz, String attribute) {
-        for (Field field : clazz.getDeclaredFields()) {
-            field.setAccessible(true);
-            if (field.getName().equals(attribute)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     public static void main(String[] args) {
         String str = "parentId";
