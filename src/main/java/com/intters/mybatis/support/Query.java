@@ -18,13 +18,13 @@ public class Query {
      * 当前页
      */
     @ApiModelProperty(value = "当前页")
-    private Integer current;
+    private Integer current = 1;
 
     /**
      * 每页的数量
      */
     @ApiModelProperty(value = "每页的数量")
-    private Integer size;
+    private Integer size = 10;
 
     /**
      * 排序的字段名
@@ -37,12 +37,4 @@ public class Query {
      */
     @ApiModelProperty(hidden = true)
     private String descs;
-
-    public Integer getCurrent() {
-        return current == null ? 1 : current;
-    }
-
-    public Integer getSize() {
-        return size == null ? 1 : size;
-    }
 }

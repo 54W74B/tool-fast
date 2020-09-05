@@ -21,16 +21,32 @@ public class JedisUtil {
     public JedisUtil() {
     }
 
+    /**
+     * 构造函数
+     *
+     * @param jedisPool {@link JedisPool}
+     */
     public JedisUtil(JedisPool jedisPool) {
         JEDIS_POOL = jedisPool;
         jedis = JEDIS_POOL.getResource();
     }
 
+    /**
+     * 初始化Jedis
+     *
+     * @param jedisPool {@link JedisPool}
+     * @return Jedis工具类
+     */
     public static JedisUtil init(JedisPool jedisPool) {
         JEDIS_UTIL = new JedisUtil(jedisPool);
         return JEDIS_UTIL;
     }
 
+    /**
+     * 获取Jedis
+     *
+     * @return {@link Jedis}
+     */
     private static Jedis getJedis() {
         if (jedis == null) {
             jedis = JEDIS_POOL.getResource();
@@ -38,6 +54,9 @@ public class JedisUtil {
         return jedis;
     }
 
+    /**
+     * 关闭Jedis
+     */
     private static void close() {
         if (jedis != null) {
             jedis.close();

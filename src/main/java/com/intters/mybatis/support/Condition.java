@@ -1,6 +1,5 @@
 package com.intters.mybatis.support;
 
-import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -8,7 +7,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.intters.util.StrUtil;
 import org.springframework.beans.BeanUtils;
 
-import java.lang.reflect.Field;
 import java.util.Map;
 
 /**
@@ -19,13 +17,11 @@ import java.util.Map;
  */
 public class Condition {
 
-    public final static String ID = "ID";
-
     /**
      * 转化成mybatis plus中的Page
      *
-     * @param query
-     * @return
+     * @param query 查询条件
+     * @return {@link IPage}
      */
     public static <T> IPage<T> getPage(Query query) {
         Page<T> page = new Page<>(query.getCurrent(), query.getSize());
@@ -37,9 +33,9 @@ public class Condition {
     /**
      * 获取mybatis plus中的QueryWrapper
      *
-     * @param entity
-     * @param <T>
-     * @return
+     * @param entity 实体
+     * @param <T>    泛型
+     * @return {@link QueryWrapper}
      */
     public static <T> QueryWrapper<T> getQueryWrapper(T entity) {
         return new QueryWrapper<>(entity);
@@ -48,10 +44,10 @@ public class Condition {
     /**
      * 获取mybatis plus中的QueryWrapper
      *
-     * @param query
-     * @param clazz
-     * @param <T>
-     * @return
+     * @param query 查询条件
+     * @param clazz 类
+     * @param <T>   泛型
+     * @return {@link QueryWrapper}
      */
     public static <T> QueryWrapper<T> getQueryWrapper(Map<String, Object> query, Class<T> clazz) {
         QueryWrapper<T> qw = new QueryWrapper<>();
@@ -63,11 +59,5 @@ public class Condition {
             query.clear();
         }
         return qw;
-    }
-
-
-    public static void main(String[] args) {
-        String str = "parentId";
-        System.out.println(str.toUpperCase().contains(ID));
     }
 }

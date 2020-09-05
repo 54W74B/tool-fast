@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="mybatisSql关键字测试套件">
+    <test name="条件构造器">
+        <classes>
+            <class name="com.intters.mybatis.support.SqlKeywordTest">
+                <methods>
+                    <include name="buildCondition"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

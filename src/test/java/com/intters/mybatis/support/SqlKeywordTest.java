@@ -10,13 +10,13 @@ import java.util.HashMap;
  * @author Ruison
  * @date 2020/9/4-18:11
  */
-class SqlKeywordTest {
+public class SqlKeywordTest {
 
     @Test
-    void buildCondition() {
+    public void buildCondition() {
         SqlKeyword.buildCondition(MapBuilder.create(new HashMap<String, Object>(4))
                         .put("id", 1)
-                        .put("name_like", "Ruison")
+                        .put("name_null", "Ruison")
                         .map(),
                 new QueryWrapper<>(),
                 null);

@@ -9,6 +9,8 @@ import java.lang.reflect.Field;
 import java.util.Map;
 
 /**
+ * 定义常用的 sql关键字
+ *
  * @author Ruison
  * @date 2020/8/29-18:21
  */
@@ -34,7 +36,7 @@ public class SqlKeyword {
      * @param query 查询字段
      * @param qw    查询包装类
      * @param clazz 类
-     * @param <T> 泛型
+     * @param <T>   泛型
      */
     public static <T> void buildCondition(Map<String, Object> query, QueryWrapper<?> qw, Class<T> clazz) {
         if (query.isEmpty()) {
@@ -44,60 +46,60 @@ public class SqlKeyword {
             if (ObjectUtil.hasEmpty(k, v) || k.endsWith(IGNORE)) {
                 return;
             }
-            if (k.endsWith(EQUAL)) {
-                String column = getColumn(k, EQUAL);
-                if (clazz != null && classContainProperties(clazz, column)) {
-                    qw.eq(column, v);
+            if (k.endsWith(LIKE)) {
+                String column = getColumn(k, LIKE);
+                if (clazz == null || classContainProperties(clazz, column)) {
+                    qw.like(column, v);
                 }
             } else if (k.endsWith(NOT_EQUAL)) {
                 String column = getColumn(k, NOT_EQUAL);
-                if (clazz != null && classContainProperties(clazz, column)) {
+                if (clazz == null || classContainProperties(clazz, column)) {
                     qw.ne(column, v);
                 }
             } else if (k.endsWith(NOT_LIKE)) {
                 String column = getColumn(k, NOT_LIKE);
-                if (clazz != null && classContainProperties(clazz, column)) {
+                if (clazz == null || classContainProperties(clazz, column)) {
                     qw.notLike(column, v);
                 }
             } else if (k.endsWith(GT)) {
                 String column = getColumn(k, GT);
-                if (clazz != null && classContainProperties(clazz, column)) {
+                if (clazz == null || classContainProperties(clazz, column)) {
                     qw.gt(column, v);
                 }
             } else if (k.endsWith(LT)) {
                 String column = getColumn(k, LT);
-                if (clazz != null && classContainProperties(clazz, column)) {
+                if (clazz == null || classContainProperties(clazz, column)) {
                     qw.lt(column, v);
                 }
             } else if (k.endsWith(DATE_GT)) {
                 String column = getColumn(k, DATE_GT);
-                if (clazz != null && classContainProperties(clazz, column)) {
+                if (clazz == null || classContainProperties(clazz, column)) {
                     qw.gt(column, v);
                 }
             } else if (k.endsWith(DATE_EQUAL)) {
                 String column = getColumn(k, DATE_EQUAL);
-                if (clazz != null && classContainProperties(clazz, column)) {
+                if (clazz == null || classContainProperties(clazz, column)) {
                     qw.eq(column, v);
                 }
             } else if (k.endsWith(DATE_LT)) {
                 String column = getColumn(k, DATE_LT);
-                if (clazz != null && classContainProperties(clazz, column)) {
+                if (clazz == null || classContainProperties(clazz, column)) {
                     qw.lt(column, v);
                 }
             } else if (k.endsWith(IS_NULL)) {
                 String column = getColumn(k, IS_NULL);
-                if (clazz != null && classContainProperties(clazz, column)) {
+                if (clazz == null || classContainProperties(clazz, column)) {
                     qw.isNull(column);
                 }
             } else if (k.endsWith(NOT_NULL)) {
                 String column = getColumn(k, NOT_NULL);
-                if (clazz != null && classContainProperties(clazz, column)) {
+                if (clazz == null || classContainProperties(clazz, column)) {
                     qw.isNotNull(column);
                 }
             } else {
-                String column = getColumn(k, LIKE);
-                if (clazz != null && classContainProperties(clazz, column)) {
-                    qw.like(column, v);
+                String column = getColumn(k, EQUAL);
+                if (clazz == null || classContainProperties(clazz, column)) {
+                    qw.eq(column, v);
                 }
             }
         });
@@ -132,7 +134,7 @@ public class SqlKeyword {
      *
      * @param clazz     类
      * @param attribute 属性
-     * @param <T> 泛型
+     * @param <T>       泛型
      * @return true or false
      */
     private static <T> boolean classContainProperties(Class<T> clazz, String attribute) {
