@@ -14,13 +14,13 @@ import java.util.concurrent.TimeUnit;
  */
 public class RedisUtil {
 
-    private static RedisTemplate<String, Object> redisTemplate;
+    private static RedisTemplate<String, String> redisTemplate;
     private static RedisUtil REDIS_UTIL = null;
 
     public RedisUtil() {
     }
 
-    public RedisUtil(RedisTemplate<String, Object> redisTemplate) {
+    public RedisUtil(RedisTemplate<String, String> redisTemplate) {
         RedisUtil.redisTemplate = redisTemplate;
     }
 
@@ -30,7 +30,7 @@ public class RedisUtil {
      * @param redisTemplate {@link RedisTemplate}
      * @return {@link RedisUtil}
      */
-    public static RedisUtil init(RedisTemplate<String, Object> redisTemplate) {
+    public static RedisUtil init(RedisTemplate<String, String> redisTemplate) {
         if (REDIS_UTIL == null) {
             REDIS_UTIL = new RedisUtil(redisTemplate);
         }

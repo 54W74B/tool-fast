@@ -55,7 +55,7 @@ public class FtpUtil extends Ftp {
      */
     public String uploadFile(String destPath, String fileName, File file) {
         // 上传路径
-        String uploadPath = destPath + (StringUtils.isBlank(fileName) ? file.getName() : fileName);
+        String uploadPath = getUploadPath(destPath, fileName, file.getName());
         return upload(uploadPath, file) ? uploadPath : null;
     }
 
@@ -77,10 +77,22 @@ public class FtpUtil extends Ftp {
         File file = File.createTempFile(filename[0], filename[1]);
         FileUtils.copyInputStreamToFile(multipartFile.getInputStream(), file);
         // 上传路径
-        String uploadPath = destPath + (StringUtils.isBlank(fileName) ? originalFilename : fileName);
+        String uploadPath = getUploadPath(destPath, fileName, originalFilename);
         boolean uploadResult = upload(uploadPath, file);
         // 删除文件
         file.deleteOnExit();
         return uploadResult ? uploadPath : null;
+    }
+
+    /**
+     * 获取上传路径
+     *
+     * @param destPath 服务端路径，可以为{@code null} 或者相对路径或绝对路径
+     * @param fileName 自定义文件名，为空，拿的是originalFilename
+     * @param originalFilename 文件原始名称
+     * @return 上传路径
+     */
+    public static String getUploadPath(String destPath, String fileName, String originalFilename) {
+        return destPath + "/" + (StringUtils.isBlank(fileName) ? originalFilename : fileName);
     }
 }

@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.54w74b</groupId>
-	<artifactId>-</artifactId>
+	<artifactId>tool-fast</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
@@ -51,6 +51,9 @@
 		<jedis.version>2.9.0</jedis.version>
 		<lombok.version>1.18.0</lombok.version>
 		<mybatis.version>3.1.0</mybatis.version>
+		<swagger.version>2.9.2</swagger.version>
+		<swagger.models.version>1.5.21</swagger.models.version>
+		<swagger.bootstrapui.version>1.9.2</swagger.bootstrapui.version>
 		<hutool.version>5.4.0</hutool.version>
 	</properties>
 
@@ -122,14 +125,12 @@
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 			<version>${fastjson.version}</version>
-			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 			<version>${gson.version}</version>
-			<optional>true</optional>
 		</dependency>
 
 		<dependency>
@@ -150,6 +151,32 @@
 			<groupId>org.apache.directory.studio</groupId>
 			<artifactId>org.apache.commons.io</artifactId>
 			<version>2.4</version>
+			<optional>true</optional>
+		</dependency>
+
+		<!--Swagger-->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${swagger.version}</version>
+			<optional>true</optional>
+			<exclusions>
+				<exclusion>
+					<groupId>io.swagger</groupId>
+					<artifactId>swagger-models</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-models</artifactId>
+			<version>${swagger.models.version}</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>com.github.xiaoymin</groupId>
+			<artifactId>swagger-bootstrap-ui</artifactId>
+			<version>${swagger.bootstrapui.version}</version>
 			<optional>true</optional>
 		</dependency>
 

@@ -76,8 +76,8 @@ public class RsaKeyUtil {
      * @param s 待加密字符串
      * @return 加密完的字符串
      */
-    public static String toHexString(String s) {
-        return (new BASE64Encoder()).encodeBuffer(s.getBytes());
+    public static String toHexString(byte[] s) {
+        return (new BASE64Encoder()).encodeBuffer(s);
     }
 
     /**
