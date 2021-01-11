@@ -11,11 +11,11 @@ public enum ResponseEnum {
     /**
      * 成功
      */
-    SUCCESS(0, "SUCCESS"),
+    SUCCESS(200, "SUCCESS"),
     /**
      * 失败
      */
-    ERROR(1, "ERROR"),
+    ERROR(500, "ERROR"),
     ;
 
     private Integer code;
