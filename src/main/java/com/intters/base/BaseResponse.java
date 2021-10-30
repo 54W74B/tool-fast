@@ -4,7 +4,6 @@ import com.intters.enums.CodeEnum;
 import com.intters.enums.ResponseEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,7 +17,6 @@ import java.io.Serializable;
  */
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @ApiModel(value = "响应信息")
 public class BaseResponse<T> implements Serializable {
     private static final long serialVersionUID = 7135745943966596269L;
@@ -26,7 +24,7 @@ public class BaseResponse<T> implements Serializable {
      * 状态码
      */
     @ApiModelProperty(value = "状态码")
-    private int code;
+    private Integer code;
     /**
      * 响应信息
      */
@@ -38,9 +36,15 @@ public class BaseResponse<T> implements Serializable {
     @ApiModelProperty(value = "响应内容")
     private T data;
 
-    public BaseResponse(int code, String message) {
-        this.code = code;
+    public BaseResponse(Integer code, String message) {
+        this.code = (code != null ? code : ResponseEnum.ERROR.getCode());
         this.message = message;
+    }
+
+    public BaseResponse(Integer code, String message, T data) {
+        this.code = code != null ? code : ResponseEnum.ERROR.getCode();
+        this.message = message;
+        this.data = data;
     }
 
     public static <T> BaseResponse<T> ok() {
