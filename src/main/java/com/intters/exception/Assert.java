@@ -123,6 +123,19 @@ public class Assert {
      * 判断波尔类型
      * 判断更新，删除，插入等操作是否成功
      *
+     * @param result 更新，删除，插入等操作结果值，boolean类型
+     * @param msg    错误信息
+     */
+    public static void checkBoolean(boolean result, String msg) {
+        if (!result) {
+            throw new BaseException(msg);
+        }
+    }
+
+    /**
+     * 判断波尔类型
+     * 判断更新，删除，插入等操作是否成功
+     *
      * @param result   更新，删除，插入等操作结果值，boolean类型
      * @param codeEnum 错误信息
      */
